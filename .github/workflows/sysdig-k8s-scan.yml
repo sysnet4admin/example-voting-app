@@ -23,4 +23,5 @@ jobs:
       env:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
-        ./sysdig-cli-scanner --iac .
+        ./sysdig-cli-scanner --iac --apiurl https://secure.sysdig.com .
+
