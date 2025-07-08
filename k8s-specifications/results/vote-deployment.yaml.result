@@ -1,0 +1,187 @@
+2025-07-08T11:27:00Z INF Starting IaC scan
+2025-07-08T11:27:00Z INF Scanning paths paths=["k8s-specifications/vote-deployment.yaml"]
+2025-07-08T11:27:02Z INF Sent resources for processing, waiting for result
+2025-07-08T11:27:07Z INF Received scan result
+Summary
+—------
+Detected 1 modules/manifests in 1 folders
+1 resources scraped
+0 unsupported resources (use –list-unsupported-resources for details)
+
+Findings:
+ 🔴 5 High
+ 🟠 11 Medium
+ 🟡 8 Low
+
+Details
+—------
+CONTROL: Workload without ServiceAccount | 🔴 High | 1 Occurrences
++----------+------------+----------------------------------+--------+
+| RESOURCE |    KIND    |        RESOURCE LOCATION         | SOURCE |
++----------+------------+----------------------------------+--------+
+| vote     | Deployment | `serviceAccountName` in workload | /      |
++----------+------------+----------------------------------+--------+
+
+CONTROL: Container with writable root file system | 🔴 High | 1 Occurrences
++----------+------------+------------------------------------------+--------+
+| RESOURCE |    KIND    |            RESOURCE LOCATION             | SOURCE |
++----------+------------+------------------------------------------+--------+
+| vote     | Deployment | readOnlyRootFilesystem in container vote | /      |
++----------+------------+------------------------------------------+--------+
+
+CONTROL: Container with RunAsUser root or not set | 🔴 High | 1 Occurrences
++----------+------------+-----------------------------+--------+
+| RESOURCE |    KIND    |      RESOURCE LOCATION      | SOURCE |
++----------+------------+-----------------------------+--------+
+| vote     | Deployment | runAsUser in container vote | /      |
++----------+------------+-----------------------------+--------+
+
+CONTROL: Container with NET_RAW capability | 🔴 High | 1 Occurrences
++----------+------------+--------------------------------+--------+
+| RESOURCE |    KIND    |       RESOURCE LOCATION        | SOURCE |
++----------+------------+--------------------------------+--------+
+| vote     | Deployment | capabilities in container vote | /      |
++----------+------------+--------------------------------+--------+
+
+CONTROL: Container with Forbidden Capabilities | 🔴 High | 1 Occurrences
++----------+------------+--------------------------------+--------+
+| RESOURCE |    KIND    |       RESOURCE LOCATION        | SOURCE |
++----------+------------+--------------------------------+--------+
+| vote     | Deployment | capabilities in container vote | /      |
++----------+------------+--------------------------------+--------+
+
+CONTROL: Workload container default RunAsGroup root | 🟠 Medium | 1 Occurrences
++----------+------------+--------------------------+--------+
+| RESOURCE |    KIND    |    RESOURCE LOCATION     | SOURCE |
++----------+------------+--------------------------+--------+
+| vote     | Deployment | `runAsGroup` in workload | /      |
++----------+------------+--------------------------+--------+
+
+CONTROL: Container using latest image | 🟠 Medium | 1 Occurrences
++----------+------------+-------------------------+--------+
+| RESOURCE |    KIND    |    RESOURCE LOCATION    | SOURCE |
++----------+------------+-------------------------+--------+
+| vote     | Deployment | image in container vote | /      |
++----------+------------+-------------------------+--------+
+
+CONTROL: Container with root group access | 🟠 Medium | 1 Occurrences
++----------+------------+------------------------------+--------+
+| RESOURCE |    KIND    |      RESOURCE LOCATION       | SOURCE |
++----------+------------+------------------------------+--------+
+| vote     | Deployment | runAsGroup in container vote | /      |
++----------+------------+------------------------------+--------+
+
+CONTROL: Workload missing CPU limit | 🟠 Medium | 1 Occurrences
++----------+------------+------------------------------+--------+
+| RESOURCE |    KIND    |      RESOURCE LOCATION       | SOURCE |
++----------+------------+------------------------------+--------+
+| vote     | Deployment | limits.cpu in container vote | /      |
++----------+------------+------------------------------+--------+
+
+CONTROL: Workload missing memory limit | 🟠 Medium | 1 Occurrences
++----------+------------+---------------------------------+--------+
+| RESOURCE |    KIND    |        RESOURCE LOCATION        | SOURCE |
++----------+------------+---------------------------------+--------+
+| vote     | Deployment | limits.memory in container vote | /      |
++----------+------------+---------------------------------+--------+
+
+CONTROL: Container using image without digest | 🟠 Medium | 1 Occurrences
++----------+------------+-------------------------+--------+
+| RESOURCE |    KIND    |    RESOURCE LOCATION    | SOURCE |
++----------+------------+-------------------------+--------+
+| vote     | Deployment | image in container vote | /      |
++----------+------------+-------------------------+--------+
+
+CONTROL: Container with ANY capability | 🟠 Medium | 1 Occurrences
++----------+------------+--------------------------------------+--------+
+| RESOURCE |    KIND    |          RESOURCE LOCATION           | SOURCE |
++----------+------------+--------------------------------------+--------+
+| vote     | Deployment | Capabilities Count in container vote | /      |
++----------+------------+--------------------------------------+--------+
+
+CONTROL: Policies - Defined Containers Security Context | 🟠 Medium | 1 Occurrences
++----------+------------+-----------------------------------+--------+
+| RESOURCE |    KIND    |         RESOURCE LOCATION         | SOURCE |
++----------+------------+-----------------------------------+--------+
+| vote     | Deployment | securityContext in container vote | /      |
++----------+------------+-----------------------------------+--------+
+
+CONTROL: Approved Registries | 🟠 Medium | 1 Occurrences
++----------+------------+-------------------------+--------+
+| RESOURCE |    KIND    |    RESOURCE LOCATION    | SOURCE |
++----------+------------+-------------------------+--------+
+| vote     | Deployment | image in container vote | /      |
++----------+------------+-------------------------+--------+
+
+CONTROL: GCR - Approved Registries | 🟠 Medium | 1 Occurrences
++----------+------------+-------------------------+--------+
+| RESOURCE |    KIND    |    RESOURCE LOCATION    | SOURCE |
++----------+------------+-------------------------+--------+
+| vote     | Deployment | image in container vote | /      |
++----------+------------+-------------------------+--------+
+
+CONTROL: ACR - Approved Registries | 🟠 Medium | 1 Occurrences
++----------+------------+-------------------------+--------+
+| RESOURCE |    KIND    |    RESOURCE LOCATION    | SOURCE |
++----------+------------+-------------------------+--------+
+| vote     | Deployment | image in container vote | /      |
++----------+------------+-------------------------+--------+
+
+CONTROL: Workload container default RunAsUser root | 🟡 Low | 1 Occurrences
++----------+------------+-------------------------+--------+
+| RESOURCE |    KIND    |    RESOURCE LOCATION    | SOURCE |
++----------+------------+-------------------------+--------+
+| vote     | Deployment | `runAsUser` in workload | /      |
++----------+------------+-------------------------+--------+
+
+CONTROL: Container permitting root | 🟡 Low | 1 Occurrences
++----------+------------+--------------------------------+--------+
+| RESOURCE |    KIND    |       RESOURCE LOCATION        | SOURCE |
++----------+------------+--------------------------------+--------+
+| vote     | Deployment | runAsNonRoot in container vote | /      |
++----------+------------+--------------------------------+--------+
+
+CONTROL: Container uid is host range | 🟡 Low | 1 Occurrences
++----------+------------+-----------------------------+--------+
+| RESOURCE |    KIND    |      RESOURCE LOCATION      | SOURCE |
++----------+------------+-----------------------------+--------+
+| vote     | Deployment | runAsUser in container vote | /      |
++----------+------------+-----------------------------+--------+
+
+CONTROL: Workload missing CPU request | 🟡 Low | 1 Occurrences
++----------+------------+--------------------------------+--------+
+| RESOURCE |    KIND    |       RESOURCE LOCATION        | SOURCE |
++----------+------------+--------------------------------+--------+
+| vote     | Deployment | requests.cpu in container vote | /      |
++----------+------------+--------------------------------+--------+
+
+CONTROL: Workload missing memory request | 🟡 Low | 1 Occurrences
++----------+------------+-----------------------------------+--------+
+| RESOURCE |    KIND    |         RESOURCE LOCATION         | SOURCE |
++----------+------------+-----------------------------------+--------+
+| vote     | Deployment | requests.memory in container vote | /      |
++----------+------------+-----------------------------------+--------+
+
+CONTROL: Workload container default permits root | 🟡 Low | 1 Occurrences
++----------+------------+----------------------------+--------+
+| RESOURCE |    KIND    |     RESOURCE LOCATION      | SOURCE |
++----------+------------+----------------------------+--------+
+| vote     | Deployment | `runAsNonRoot` in workload | /      |
++----------+------------+----------------------------+--------+
+
+CONTROL: Container without liveness probe | 🟡 Low | 1 Occurrences
++----------+------------+---------------------------------+--------+
+| RESOURCE |    KIND    |        RESOURCE LOCATION        | SOURCE |
++----------+------------+---------------------------------+--------+
+| vote     | Deployment | livenessProbe in container vote | /      |
++----------+------------+---------------------------------+--------+
+
+CONTROL: Container without readiness probe | 🟡 Low | 1 Occurrences
++----------+------------+----------------------------------+--------+
+| RESOURCE |    KIND    |        RESOURCE LOCATION         | SOURCE |
++----------+------------+----------------------------------+--------+
+| vote     | Deployment | readinessProbe in container vote | /      |
++----------+------------+----------------------------------+--------+
+
+
+IaC Scan FAIL at 2025-07-08 11:27:00.431520608 +0000 UTC m=+0.026247776

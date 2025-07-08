@@ -1,0 +1,187 @@
+2025-07-08T11:27:08Z INF Starting IaC scan
+2025-07-08T11:27:08Z INF Scanning paths paths=["k8s-specifications/worker-deployment.yaml"]
+2025-07-08T11:27:10Z INF Sent resources for processing, waiting for result
+2025-07-08T11:27:15Z INF Received scan result
+Summary
+—------
+Detected 1 modules/manifests in 1 folders
+1 resources scraped
+0 unsupported resources (use –list-unsupported-resources for details)
+
+Findings:
+ 🔴 5 High
+ 🟠 11 Medium
+ 🟡 8 Low
+
+Details
+—------
+CONTROL: Workload without ServiceAccount | 🔴 High | 1 Occurrences
++----------+------------+----------------------------------+--------+
+| RESOURCE |    KIND    |        RESOURCE LOCATION         | SOURCE |
++----------+------------+----------------------------------+--------+
+| worker   | Deployment | `serviceAccountName` in workload | /      |
++----------+------------+----------------------------------+--------+
+
+CONTROL: Container with writable root file system | 🔴 High | 1 Occurrences
++----------+------------+--------------------------------------------+--------+
+| RESOURCE |    KIND    |             RESOURCE LOCATION              | SOURCE |
++----------+------------+--------------------------------------------+--------+
+| worker   | Deployment | readOnlyRootFilesystem in container worker | /      |
++----------+------------+--------------------------------------------+--------+
+
+CONTROL: Container with RunAsUser root or not set | 🔴 High | 1 Occurrences
++----------+------------+-------------------------------+--------+
+| RESOURCE |    KIND    |       RESOURCE LOCATION       | SOURCE |
++----------+------------+-------------------------------+--------+
+| worker   | Deployment | runAsUser in container worker | /      |
++----------+------------+-------------------------------+--------+
+
+CONTROL: Container with NET_RAW capability | 🔴 High | 1 Occurrences
++----------+------------+----------------------------------+--------+
+| RESOURCE |    KIND    |        RESOURCE LOCATION         | SOURCE |
++----------+------------+----------------------------------+--------+
+| worker   | Deployment | capabilities in container worker | /      |
++----------+------------+----------------------------------+--------+
+
+CONTROL: Container with Forbidden Capabilities | 🔴 High | 1 Occurrences
++----------+------------+----------------------------------+--------+
+| RESOURCE |    KIND    |        RESOURCE LOCATION         | SOURCE |
++----------+------------+----------------------------------+--------+
+| worker   | Deployment | capabilities in container worker | /      |
++----------+------------+----------------------------------+--------+
+
+CONTROL: Workload container default RunAsGroup root | 🟠 Medium | 1 Occurrences
++----------+------------+--------------------------+--------+
+| RESOURCE |    KIND    |    RESOURCE LOCATION     | SOURCE |
++----------+------------+--------------------------+--------+
+| worker   | Deployment | `runAsGroup` in workload | /      |
++----------+------------+--------------------------+--------+
+
+CONTROL: Container using latest image | 🟠 Medium | 1 Occurrences
++----------+------------+---------------------------+--------+
+| RESOURCE |    KIND    |     RESOURCE LOCATION     | SOURCE |
++----------+------------+---------------------------+--------+
+| worker   | Deployment | image in container worker | /      |
++----------+------------+---------------------------+--------+
+
+CONTROL: Container with root group access | 🟠 Medium | 1 Occurrences
++----------+------------+--------------------------------+--------+
+| RESOURCE |    KIND    |       RESOURCE LOCATION        | SOURCE |
++----------+------------+--------------------------------+--------+
+| worker   | Deployment | runAsGroup in container worker | /      |
++----------+------------+--------------------------------+--------+
+
+CONTROL: Workload missing CPU limit | 🟠 Medium | 1 Occurrences
++----------+------------+--------------------------------+--------+
+| RESOURCE |    KIND    |       RESOURCE LOCATION        | SOURCE |
++----------+------------+--------------------------------+--------+
+| worker   | Deployment | limits.cpu in container worker | /      |
++----------+------------+--------------------------------+--------+
+
+CONTROL: Workload missing memory limit | 🟠 Medium | 1 Occurrences
++----------+------------+-----------------------------------+--------+
+| RESOURCE |    KIND    |         RESOURCE LOCATION         | SOURCE |
++----------+------------+-----------------------------------+--------+
+| worker   | Deployment | limits.memory in container worker | /      |
++----------+------------+-----------------------------------+--------+
+
+CONTROL: Container using image without digest | 🟠 Medium | 1 Occurrences
++----------+------------+---------------------------+--------+
+| RESOURCE |    KIND    |     RESOURCE LOCATION     | SOURCE |
++----------+------------+---------------------------+--------+
+| worker   | Deployment | image in container worker | /      |
++----------+------------+---------------------------+--------+
+
+CONTROL: Container with ANY capability | 🟠 Medium | 1 Occurrences
++----------+------------+----------------------------------------+--------+
+| RESOURCE |    KIND    |           RESOURCE LOCATION            | SOURCE |
++----------+------------+----------------------------------------+--------+
+| worker   | Deployment | Capabilities Count in container worker | /      |
++----------+------------+----------------------------------------+--------+
+
+CONTROL: Policies - Defined Containers Security Context | 🟠 Medium | 1 Occurrences
++----------+------------+-------------------------------------+--------+
+| RESOURCE |    KIND    |          RESOURCE LOCATION          | SOURCE |
++----------+------------+-------------------------------------+--------+
+| worker   | Deployment | securityContext in container worker | /      |
++----------+------------+-------------------------------------+--------+
+
+CONTROL: Approved Registries | 🟠 Medium | 1 Occurrences
++----------+------------+---------------------------+--------+
+| RESOURCE |    KIND    |     RESOURCE LOCATION     | SOURCE |
++----------+------------+---------------------------+--------+
+| worker   | Deployment | image in container worker | /      |
++----------+------------+---------------------------+--------+
+
+CONTROL: GCR - Approved Registries | 🟠 Medium | 1 Occurrences
++----------+------------+---------------------------+--------+
+| RESOURCE |    KIND    |     RESOURCE LOCATION     | SOURCE |
++----------+------------+---------------------------+--------+
+| worker   | Deployment | image in container worker | /      |
++----------+------------+---------------------------+--------+
+
+CONTROL: ACR - Approved Registries | 🟠 Medium | 1 Occurrences
++----------+------------+---------------------------+--------+
+| RESOURCE |    KIND    |     RESOURCE LOCATION     | SOURCE |
++----------+------------+---------------------------+--------+
+| worker   | Deployment | image in container worker | /      |
++----------+------------+---------------------------+--------+
+
+CONTROL: Workload container default RunAsUser root | 🟡 Low | 1 Occurrences
++----------+------------+-------------------------+--------+
+| RESOURCE |    KIND    |    RESOURCE LOCATION    | SOURCE |
++----------+------------+-------------------------+--------+
+| worker   | Deployment | `runAsUser` in workload | /      |
++----------+------------+-------------------------+--------+
+
+CONTROL: Container permitting root | 🟡 Low | 1 Occurrences
++----------+------------+----------------------------------+--------+
+| RESOURCE |    KIND    |        RESOURCE LOCATION         | SOURCE |
++----------+------------+----------------------------------+--------+
+| worker   | Deployment | runAsNonRoot in container worker | /      |
++----------+------------+----------------------------------+--------+
+
+CONTROL: Container uid is host range | 🟡 Low | 1 Occurrences
++----------+------------+-------------------------------+--------+
+| RESOURCE |    KIND    |       RESOURCE LOCATION       | SOURCE |
++----------+------------+-------------------------------+--------+
+| worker   | Deployment | runAsUser in container worker | /      |
++----------+------------+-------------------------------+--------+
+
+CONTROL: Workload missing CPU request | 🟡 Low | 1 Occurrences
++----------+------------+----------------------------------+--------+
+| RESOURCE |    KIND    |        RESOURCE LOCATION         | SOURCE |
++----------+------------+----------------------------------+--------+
+| worker   | Deployment | requests.cpu in container worker | /      |
++----------+------------+----------------------------------+--------+
+
+CONTROL: Workload missing memory request | 🟡 Low | 1 Occurrences
++----------+------------+-------------------------------------+--------+
+| RESOURCE |    KIND    |          RESOURCE LOCATION          | SOURCE |
++----------+------------+-------------------------------------+--------+
+| worker   | Deployment | requests.memory in container worker | /      |
++----------+------------+-------------------------------------+--------+
+
+CONTROL: Workload container default permits root | 🟡 Low | 1 Occurrences
++----------+------------+----------------------------+--------+
+| RESOURCE |    KIND    |     RESOURCE LOCATION      | SOURCE |
++----------+------------+----------------------------+--------+
+| worker   | Deployment | `runAsNonRoot` in workload | /      |
++----------+------------+----------------------------+--------+
+
+CONTROL: Container without liveness probe | 🟡 Low | 1 Occurrences
++----------+------------+-----------------------------------+--------+
+| RESOURCE |    KIND    |         RESOURCE LOCATION         | SOURCE |
++----------+------------+-----------------------------------+--------+
+| worker   | Deployment | livenessProbe in container worker | /      |
++----------+------------+-----------------------------------+--------+
+
+CONTROL: Container without readiness probe | 🟡 Low | 1 Occurrences
++----------+------------+------------------------------------+--------+
+| RESOURCE |    KIND    |         RESOURCE LOCATION          | SOURCE |
++----------+------------+------------------------------------+--------+
+| worker   | Deployment | readinessProbe in container worker | /      |
++----------+------------+------------------------------------+--------+
+
+
+IaC Scan FAIL at 2025-07-08 11:27:08.717137255 +0000 UTC m=+0.026500084

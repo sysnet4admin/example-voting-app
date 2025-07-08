@@ -1,0 +1,3 @@
+2025-07-08T11:27:07Z INF Starting IaC scan
+2025-07-08T11:27:07Z INF Scanning paths paths=["k8s-specifications/vote-service.yaml"]
+OK: no resources found
