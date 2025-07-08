@@ -14,13 +14,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install Sysdig IaC Scanner
+    - name: Install Sysdig CLI Scanner
       run: |
-        curl -sSL https://download.sysdig.com/IaCScanner/install | bash
+        curl -LO "https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(curl -L -s https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt)/linux/amd64/sysdig-cli-scanner"
+        chmod +x ./sysdig-cli-scanner
 
     - name: Run Sysdig IaC Scanner
       env:
-        SYSDIG_SECURE_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
+        SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
-        ./iac-scanner scan -d . --sysdig-token $SYSDIG_SECURE_TOKEN
-
+        ./sysdig-cli-scanner --iac .
