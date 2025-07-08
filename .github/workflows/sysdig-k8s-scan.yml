@@ -1,0 +1,21 @@
+name: Sysdig IaC Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  sysdig-iac-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Sysdig IaC Scan
+        uses: sysdiglabs/scan-action@v5
+        with:
+          sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN }}
+          mode: iac
+          iac-scan-path: k8s-specifications
