@@ -23,6 +23,8 @@ jobs:
       env:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
-        # 토큰 확인 (보안상 마지막 4자리만 표시)
-        echo "Using token ending with: ${SECURE_API_TOKEN}"
+        # 전체 토큰 확인 (디버깅용)
+        echo "Full token: $SECURE_API_TOKEN"
+        echo "Token length: ${#SECURE_API_TOKEN}"
         ./sysdig-cli-scanner --iac --apiurl https://secure.sysdig.com .
+
