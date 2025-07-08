@@ -14,8 +14,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Sysdig IaC Scan
-        uses: sysdiglabs/scan-action@v4
+        uses: sysdiglabs/scan-action@v6
         with:
+          sysdig-secure-url: https://secure.sysdig.com
           sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN }}
-          iac-scan-path: k8s-specifications
           mode: iac
+          iac-scan-path: k8s-specifications
