@@ -1,3 +1,0 @@
-2025-07-08T11:26:50Z INF Starting IaC scan
-2025-07-08T11:26:50Z INF Scanning paths paths=["k8s-specifications/redis-service.yaml"]
-OK: no resources found

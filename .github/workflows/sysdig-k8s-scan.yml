@@ -26,7 +26,7 @@ jobs:
       env:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
-        for yaml_file in k8s-specifications/*.yaml k8s-specifications/*.yml; do
+        for yaml_file in k8s-specifications/*-deployment.yaml; do
           if [ -f "$yaml_file" ]; then
             filename=$(basename "$yaml_file")
             echo "Scanning $filename..."

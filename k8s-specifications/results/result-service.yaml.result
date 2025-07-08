@@ -1,3 +1,0 @@
-2025-07-08T11:26:59Z INF Starting IaC scan
-2025-07-08T11:26:59Z INF Scanning paths paths=["k8s-specifications/result-service.yaml"]
-OK: no resources found
