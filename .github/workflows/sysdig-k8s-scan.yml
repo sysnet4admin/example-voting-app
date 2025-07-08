@@ -19,4 +19,4 @@ jobs:
           sysdig-secure-url: https://secure.sysdig.com
           sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN }}
           mode: iac
-          iac-scan-path: $GITHUB_WORKSPACE/k8s-specifications
+          iac-scan-path: .
