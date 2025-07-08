@@ -1,22 +1,26 @@
 name: Sysdig IaC Scan
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
+    branches: [ main ]
+  push:
     branches: [ main ]
 
 jobs:
-  sysdig-iac-scan:
+  scan:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
-      - name: Sysdig IaC Scan
-        uses: sysdiglabs/scan-action@v6
-        with:
-          sysdig-secure-url: https://secure.sysdig.com
-          sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN }}
-          mode: iac
-          iac-scan-path: .
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Sysdig IaC Scanner
+      run: |
+        curl -sSL https://download.sysdig.com/IaCScanner/install | bash
+
+    - name: Run Sysdig IaC Scanner
+      env:
+        SYSDIG_SECURE_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
+      run: |
+        ./iac-scanner scan -d . --sysdig-token $SYSDIG_SECURE_TOKEN
+
