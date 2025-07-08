@@ -19,8 +19,17 @@ jobs:
         curl -LO "https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(curl -L -s https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt)/linux/amd64/sysdig-cli-scanner"
         chmod +x ./sysdig-cli-scanner
 
+    - name: Create results directory
+      run: mkdir -p results
+
     - name: Run Sysdig IaC Scanner
       env:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
-        ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com k8s-specifications
+        for yaml_file in k8s-specifications/*.yaml k8s-specifications/*.yml; do
+          if [ -f "$yaml_file" ]; then
+            filename=$(basename "$yaml_file")
+            echo "Scanning $filename..."
+            ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com "$yaml_file" > "results/${filename}.result" 2>&1 || true
+          fi
+        done
