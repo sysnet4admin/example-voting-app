@@ -20,7 +20,7 @@ jobs:
         chmod +x ./sysdig-cli-scanner
 
     - name: Create results directory
-      run: mkdir -p results
+      run: mkdir -p k8s-specifications/results
 
     - name: Run Sysdig IaC Scanner
       env:
@@ -30,6 +30,6 @@ jobs:
           if [ -f "$yaml_file" ]; then
             filename=$(basename "$yaml_file")
             echo "Scanning $filename..."
-            ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com "$yaml_file" > "results/${filename}.result" 2>&1 || true
+            ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com "$yaml_file" > "k8s-specifications/results/${filename}.result" 2>&1 || true
           fi
         done
