@@ -1,2 +1,32 @@
-unknown flag `image'
-Cannot parse command line options
+2025-07-09T08:24:13Z Starting analysis with Sysdig scanner version 1.22.4
+2025-07-09T08:24:13Z Retrieving MainDB...
+2025-07-09T08:24:19Z Done 205.4 MB
+2025-07-09T08:24:19Z Loading MainDB V3...
+2025-07-09T08:24:19Z Done
+2025-07-09T08:24:19Z Retrieving image...
+2025-07-09T08:24:21Z Done
+2025-07-09T08:24:21Z Scan started...
+2025-07-09T08:24:22Z Uploading image sbom to backend...
+2025-07-09T08:24:23Z Uploading scanresult with sbom to backend...
+2025-07-09T08:24:24Z Done
+2025-07-09T08:24:24Z Total execution time 10.97825649s
+
+Type: dockerImage
+ImageID: sha256:4b400733331692fa93fad8fc8e75d811f485200fe34aa9f1df5082fe8038cb2d
+Digest: 
+BaseOS: debian 12.11
+PullString: vote-image:latest
+
+105 vulnerabilities found
+1 Critical (0 fixable)
+14 High (0 fixable)
+17 Medium (0 fixable)
+4 Low (0 fixable)
+69 Negligible (0 fixable)
+
+                            POLICIES EVALUATION
+    Policy: Sysdig Best Practices PASSED (0 failures - 0 risks accepted)
+
+Policies evaluation PASSED at 2025-07-09T08:24:24Z
+Full image results here: https://app.au1.sysdig.com/secure/#/vulnerabilities/results/185087b4429de5f8fcd54830198205a0/overview (id 185087b4429de5f8fcd54830198205a0)
+Execution logs written to: /home/runner/work/example-voting-app/example-voting-app/scan-logs
