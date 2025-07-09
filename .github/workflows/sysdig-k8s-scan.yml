@@ -3,8 +3,12 @@ name: Sysdig IaC Scan
 on:
   pull_request:
     branches: [ main ]
+    paths:
+      - 'k8s-specifications/**'
   push:
     branches: [ main ]
+    paths:
+      - 'k8s-specifications/**'
 
 jobs:
   scan:
