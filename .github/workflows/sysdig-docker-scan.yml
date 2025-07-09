@@ -9,40 +9,61 @@ on:
       - 'worker/Dockerfile'
 
 jobs:
-  scan-dockerfiles:
+  scan-changed-docker-images:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v44
+      with:
+        files: |
+          vote/Dockerfile
+          result/Dockerfile
+          worker/Dockerfile
+
+    - name: Set up Docker Buildx
+      if: steps.changed-files.outputs.any_changed == 'true'
+      uses: docker/setup-buildx-action@v2
+
     - name: Install Sysdig CLI Scanner
+      if: steps.changed-files.outputs.any_changed == 'true'
       run: |
         curl -LO "https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(curl -L -s https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt)/linux/amd64/sysdig-cli-scanner"
         chmod +x ./sysdig-cli-scanner
 
     - name: Create results directory
+      if: steps.changed-files.outputs.any_changed == 'true'
       run: mkdir -p docker-scan-results
 
-    - name: Scan vote/Dockerfile
+    - name: Build and Scan vote image
+      if: contains(steps.changed-files.outputs.all_changed_files, 'vote/Dockerfile')
       env:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
-        ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com vote/Dockerfile > docker-scan-results/vote-dockerfile.result 2>&1 || true
+        docker build -t vote-image:latest -f vote/Dockerfile vote/
+        ./sysdig-cli-scanner --image vote-image:latest --apiurl https://app.au1.sysdig.com > docker-scan-results/vote.result 2>&1 || true
 
-    - name: Scan result/Dockerfile
+    - name: Build and Scan result image
+      if: contains(steps.changed-files.outputs.all_changed_files, 'result/Dockerfile')
       env:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
-        ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com result/Dockerfile > docker-scan-results/result-dockerfile.result 2>&1 || true
+        docker build -t result-image:latest -f result/Dockerfile result/
+        ./sysdig-cli-scanner --image result-image:latest --apiurl https://app.au1.sysdig.com > docker-scan-results/result.result 2>&1 || true
 
-    - name: Scan worker/Dockerfile
+    - name: Build and Scan worker image
+      if: contains(steps.changed-files.outputs.all_changed_files, 'worker/Dockerfile')
       env:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
-        ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com worker/Dockerfile > docker-scan-results/worker-dockerfile.result 2>&1 || true
+        docker build -t worker-image:latest -f worker/Dockerfile worker/
+        ./sysdig-cli-scanner --image worker-image:latest --apiurl https://app.au1.sysdig.com > docker-scan-results/worker.result 2>&1 || true
 
     - name: Commit and push results
+      if: steps.changed-files.outputs.any_changed == 'true'
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -50,6 +71,6 @@ jobs:
         if git diff --staged --quiet; then
           echo "No changes to commit"
         else
-          git commit -m "Add Sysdig Dockerfile scan results"
+          git commit -m "Add Sysdig Docker scan results for changed files"
           git push
         fi
