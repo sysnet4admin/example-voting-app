@@ -44,7 +44,7 @@ jobs:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
         docker build -t vote-image:latest -f vote/Dockerfile vote/
-        ./sysdig-cli-scanner --image vote-image:latest --apiurl https://app.au1.sysdig.com > docker-scan-results/vote.result 2>&1 || true
+        ./sysdig-cli-scanner vote-image:latest --apiurl https://app.au1.sysdig.com > docker-scan-results/vote.result 2>&1 || true
 
     - name: Build and Scan result image
       if: contains(steps.changed-files.outputs.all_changed_files, 'result/Dockerfile')
@@ -52,7 +52,7 @@ jobs:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
         docker build -t result-image:latest -f result/Dockerfile result/
-        ./sysdig-cli-scanner --image result-image:latest --apiurl https://app.au1.sysdig.com > docker-scan-results/result.result 2>&1 || true
+        ./sysdig-cli-scanner result-image:latest --apiurl https://app.au1.sysdig.com > docker-scan-results/result.result 2>&1 || true
 
     - name: Build and Scan worker image
       if: contains(steps.changed-files.outputs.all_changed_files, 'worker/Dockerfile')
@@ -60,7 +60,7 @@ jobs:
         SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       run: |
         docker build -t worker-image:latest -f worker/Dockerfile worker/
-        ./sysdig-cli-scanner --image worker-image:latest --apiurl https://app.au1.sysdig.com > docker-scan-results/worker.result 2>&1 || true
+        ./sysdig-cli-scanner worker-image:latest --apiurl https://app.au1.sysdig.com > docker-scan-results/worker.result 2>&1 || true
 
     - name: Commit and push results
       if: steps.changed-files.outputs.any_changed == 'true'
