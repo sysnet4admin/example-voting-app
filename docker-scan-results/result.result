@@ -1,0 +1,45 @@
+2025-07-09T08:27:23Z Starting analysis with Sysdig scanner version 1.22.4
+2025-07-09T08:27:24Z Retrieving MainDB...
+2025-07-09T08:27:30Z Done 205.4 MB
+2025-07-09T08:27:31Z Loading MainDB V3...
+2025-07-09T08:27:31Z Done
+2025-07-09T08:27:31Z Retrieving image...
+2025-07-09T08:27:34Z Done
+2025-07-09T08:27:34Z Scan started...
+2025-07-09T08:27:35Z Uploading image sbom to backend...
+2025-07-09T08:27:36Z Uploading scanresult with sbom to backend...
+2025-07-09T08:27:37Z Done
+2025-07-09T08:27:37Z Total execution time 14.093536091s
+
+Type: dockerImage
+ImageID: sha256:499568dd7652cf4e0116080a38193bd4c962c9ef3097b550213bfdc4bf209274
+Digest: 
+BaseOS: debian 12.11
+PullString: result-image:latest
+
+112 vulnerabilities found
+1 Critical (0 fixable)
+14 High (2 fixable)
+25 Medium (9 fixable)
+5 Low (1 fixable)
+67 Negligible (0 fixable)
+
+
+      PACKAGE         TYPE     VERSION  SUGGESTED FIX  CRITICAL  HIGH  MEDIUM  LOW  NEGLIGIBLE  EXPLOIT  
+  body-parser      javascript  1.20.1      1.20.3         0       1      0      0       0          0     
+  ws               javascript  8.11.0      8.17.1         0       1      0      0       0          0     
+  express          javascript  4.18.2      4.19.2         0       0      2      0       0          0     
+  path-to-regexp   javascript   0.1.7      0.1.10         0       0      2      0       0          0     
+  cookie           javascript   0.5.0       0.7.0         0       0      1      0       0          0     
+  cookie           javascript   0.4.1       0.7.0         0       0      1      0       0          0     
+  cross-spawn      javascript   7.0.3       7.0.5         0       0      1      0       0          0     
+  send             javascript  0.18.0      0.19.0         0       0      1      0       0          0     
+  serve-static     javascript  1.15.0      1.16.0         0       0      1      0       0          0     
+  brace-expansion  javascript   2.0.1       2.0.2         0       0      0      1       0          0     
+
+                                                                POLICIES EVALUATION
+    Policy: Sysdig Best Practices FAILED (4 failures - 0 risks accepted)
+
+Policies evaluation FAILED at 2025-07-09T08:27:37Z
+Full image results here: https://app.au1.sysdig.com/secure/#/vulnerabilities/results/185087e13dc8103abf407e823486d310/overview (id 185087e13dc8103abf407e823486d310)
+Execution logs written to: /home/runner/work/example-voting-app/example-voting-app/scan-logs
