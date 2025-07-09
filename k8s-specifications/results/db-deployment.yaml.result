@@ -1,7 +1,7 @@
-2025-07-09T07:51:56Z INF Starting IaC scan
-2025-07-09T07:51:56Z INF Scanning paths paths=["k8s-specifications/db-deployment.yaml"]
-2025-07-09T07:51:57Z INF Sent resources for processing, waiting for result
-2025-07-09T07:52:03Z INF Received scan result
+2025-07-09T07:57:18Z INF Starting IaC scan
+2025-07-09T07:57:18Z INF Scanning paths paths=["k8s-specifications/db-deployment.yaml"]
+2025-07-09T07:57:20Z INF Sent resources for processing, waiting for result
+2025-07-09T07:57:25Z INF Received scan result
 Summary
 —------
 Detected 1 modules/manifests in 1 folders
@@ -184,4 +184,4 @@ CONTROL: Container without readiness probe | 🟡 Low | 1 Occurrences
 +----------+------------+--------------------------------------+--------+
 
 
-IaC Scan FAIL at 2025-07-09 07:51:56.184817816 +0000 UTC m=+0.026520908
+IaC Scan FAIL at 2025-07-09 07:57:18.249142657 +0000 UTC m=+0.026172607

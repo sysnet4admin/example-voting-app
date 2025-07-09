@@ -1,7 +1,7 @@
-2025-07-09T07:52:17Z INF Starting IaC scan
-2025-07-09T07:52:17Z INF Scanning paths paths=["k8s-specifications/vote-deployment.yaml"]
-2025-07-09T07:52:18Z INF Sent resources for processing, waiting for result
-2025-07-09T07:52:23Z INF Received scan result
+2025-07-09T07:57:39Z INF Starting IaC scan
+2025-07-09T07:57:39Z INF Scanning paths paths=["k8s-specifications/vote-deployment.yaml"]
+2025-07-09T07:57:41Z INF Sent resources for processing, waiting for result
+2025-07-09T07:57:46Z INF Received scan result
 Summary
 —------
 Detected 1 modules/manifests in 1 folders
@@ -184,4 +184,4 @@ CONTROL: Container without readiness probe | 🟡 Low | 1 Occurrences
 +----------+------------+----------------------------------+--------+
 
 
-IaC Scan FAIL at 2025-07-09 07:52:17.047930144 +0000 UTC m=+0.025891144
+IaC Scan FAIL at 2025-07-09 07:57:39.386778525 +0000 UTC m=+0.026171343
