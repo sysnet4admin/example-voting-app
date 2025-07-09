@@ -1,0 +1,55 @@
+name: Sysdig Docker Image Scan
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'vote/Dockerfile'
+      - 'result/Dockerfile'
+      - 'worker/Dockerfile'
+
+jobs:
+  scan-dockerfiles:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Sysdig CLI Scanner
+      run: |
+        curl -LO "https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(curl -L -s https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt)/linux/amd64/sysdig-cli-scanner"
+        chmod +x ./sysdig-cli-scanner
+
+    - name: Create results directory
+      run: mkdir -p docker-scan-results
+
+    - name: Scan vote/Dockerfile
+      env:
+        SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
+      run: |
+        ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com vote/Dockerfile > docker-scan-results/vote-dockerfile.result 2>&1 || true
+
+    - name: Scan result/Dockerfile
+      env:
+        SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
+      run: |
+        ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com result/Dockerfile > docker-scan-results/result-dockerfile.result 2>&1 || true
+
+    - name: Scan worker/Dockerfile
+      env:
+        SECURE_API_TOKEN: ${{ secrets.SYSDIG_SECURE_TOKEN }}
+      run: |
+        ./sysdig-cli-scanner --iac --apiurl https://app.au1.sysdig.com worker/Dockerfile > docker-scan-results/worker-dockerfile.result 2>&1 || true
+
+    - name: Commit and push results
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add docker-scan-results/
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Add Sysdig Dockerfile scan results"
+          git push
+        fi
